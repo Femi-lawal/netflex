@@ -1,2 +1,2 @@
 # netflex
-A Angular app based on Netflix
+An Angular app based on Netflix
