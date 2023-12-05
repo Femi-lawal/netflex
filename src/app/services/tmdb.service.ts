@@ -33,15 +33,15 @@ export class TmdbService {
   private baseUrl = environment.tmdb.baseUrl;
   private imageBaseUrl = environment.tmdb.imageBaseUrl;
 
-  // Fallback data for when API key is not configured
+  // Fallback data with Picsum.photos CC0 licensed placeholder images
   private fallbackMovies: Movie[] = [
     {
       id: 1,
       title: 'Stranger Things',
       name: 'Stranger Things',
       overview: 'When a young boy vanishes, a small town uncovers a mystery involving secret experiments, terrifying supernatural forces and one strange little girl.',
-      poster_path: null,
-      backdrop_path: null,
+      poster_path: 'PICSUM:1015',
+      backdrop_path: 'PICSUM_BACKDROP:1015',
       vote_average: 8.6,
       first_air_date: '2016-07-15',
       genre_ids: [18, 10765, 9648]
@@ -51,8 +51,8 @@ export class TmdbService {
       title: 'The Crown',
       name: 'The Crown',
       overview: 'This drama follows the political rivalries and romance of Queen Elizabeth II\'s reign and the events that shaped the second half of the twentieth century.',
-      poster_path: null,
-      backdrop_path: null,
+      poster_path: 'PICSUM:1019',
+      backdrop_path: 'PICSUM_BACKDROP:1019',
       vote_average: 8.2,
       first_air_date: '2016-11-04',
       genre_ids: [18]
@@ -62,8 +62,8 @@ export class TmdbService {
       title: 'Wednesday',
       name: 'Wednesday',
       overview: 'Wednesday Addams is sent to Nevermore Academy, a bizarre boarding school where she attempts to master her psychic ability.',
-      poster_path: null,
-      backdrop_path: null,
+      poster_path: 'PICSUM:1021',
+      backdrop_path: 'PICSUM_BACKDROP:1021',
       vote_average: 8.1,
       first_air_date: '2022-11-23',
       genre_ids: [10765, 9648, 35]
@@ -73,8 +73,8 @@ export class TmdbService {
       title: 'Squid Game',
       name: 'Squid Game',
       overview: 'Hundreds of cash-strapped players accept a strange invitation to compete in children\'s games. Inside, a tempting prize awaits with deadly high stakes.',
-      poster_path: null,
-      backdrop_path: null,
+      poster_path: 'PICSUM:1024',
+      backdrop_path: 'PICSUM_BACKDROP:1024',
       vote_average: 7.8,
       first_air_date: '2021-09-17',
       genre_ids: [10759, 9648, 18]
@@ -84,8 +84,8 @@ export class TmdbService {
       title: 'Money Heist',
       name: 'Money Heist',
       overview: 'Eight thieves take hostages and lock themselves in the Royal Mint of Spain as a criminal mastermind manipulates the police to carry out his plan.',
-      poster_path: null,
-      backdrop_path: null,
+      poster_path: 'PICSUM:1029',
+      backdrop_path: 'PICSUM_BACKDROP:1029',
       vote_average: 8.3,
       first_air_date: '2017-05-02',
       genre_ids: [80, 18]
@@ -95,11 +95,77 @@ export class TmdbService {
       title: 'Breaking Bad',
       name: 'Breaking Bad',
       overview: 'A high school chemistry teacher diagnosed with inoperable lung cancer turns to manufacturing and selling methamphetamine.',
-      poster_path: null,
-      backdrop_path: null,
+      poster_path: 'PICSUM:1035',
+      backdrop_path: 'PICSUM_BACKDROP:1035',
       vote_average: 9.5,
       first_air_date: '2008-01-20',
       genre_ids: [18, 80]
+    },
+    {
+      id: 7,
+      title: 'Dark',
+      name: 'Dark',
+      overview: 'A family saga with a supernatural twist, set in a German town where the disappearance of two young children exposes relationships among four families.',
+      poster_path: 'PICSUM:1036',
+      backdrop_path: 'PICSUM_BACKDROP:1036',
+      vote_average: 8.7,
+      first_air_date: '2017-12-01',
+      genre_ids: [18, 9648, 10765]
+    },
+    {
+      id: 8,
+      title: 'The Witcher',
+      name: 'The Witcher',
+      overview: 'Geralt of Rivia, a solitary monster hunter, struggles to find his place in a world where people often prove more wicked than beasts.',
+      poster_path: 'PICSUM:1039',
+      backdrop_path: 'PICSUM_BACKDROP:1039',
+      vote_average: 8.0,
+      first_air_date: '2019-12-20',
+      genre_ids: [10759, 10765, 18]
+    },
+    {
+      id: 9,
+      title: 'Ozark',
+      name: 'Ozark',
+      overview: 'A financial adviser drags his family from Chicago to the Missouri Ozarks, where he must launder money to appease a drug boss.',
+      poster_path: 'PICSUM:1040',
+      backdrop_path: 'PICSUM_BACKDROP:1040',
+      vote_average: 8.4,
+      first_air_date: '2017-07-21',
+      genre_ids: [80, 18]
+    },
+    {
+      id: 10,
+      title: 'Peaky Blinders',
+      name: 'Peaky Blinders',
+      overview: 'A gangster family epic set in 1900s England, centering on a gang who sew razor blades in the peaks of their caps.',
+      poster_path: 'PICSUM:1041',
+      backdrop_path: 'PICSUM_BACKDROP:1041',
+      vote_average: 8.8,
+      first_air_date: '2013-09-12',
+      genre_ids: [80, 18]
+    },
+    {
+      id: 11,
+      title: 'Narcos',
+      name: 'Narcos',
+      overview: 'A chronicled look at the criminal exploits of Colombian drug lord Pablo Escobar and the DEA agents who sought to bring him down.',
+      poster_path: 'PICSUM:1042',
+      backdrop_path: 'PICSUM_BACKDROP:1042',
+      vote_average: 8.5,
+      first_air_date: '2015-08-28',
+      genre_ids: [80, 18]
+    },
+    {
+      id: 12,
+      title: 'House of Cards',
+      name: 'House of Cards',
+      overview: 'A Congressman works with his equally conniving wife to exact revenge on the people who betrayed him.',
+      poster_path: 'PICSUM:1043',
+      backdrop_path: 'PICSUM_BACKDROP:1043',
+      vote_average: 8.1,
+      first_air_date: '2013-02-01',
+      genre_ids: [18]
     }
   ];
 
@@ -109,16 +175,25 @@ export class TmdbService {
     if (!path) {
       return this.getPlaceholderImage();
     }
+    
+    // Handle Picsum placeholder markers (CC0 licensed images)
+    if (path.startsWith('PICSUM:')) {
+      const id = path.split(':')[1];
+      // Return a portrait-oriented image for posters (300x450)
+      return `https://picsum.photos/id/${id}/300/450`;
+    }
+    if (path.startsWith('PICSUM_BACKDROP:')) {
+      const id = path.split(':')[1];
+      // Return a landscape-oriented image for backdrops (1280x720)
+      return `https://picsum.photos/id/${id}/1280/720`;
+    }
+    
     return `${this.imageBaseUrl}/${size}${path}`;
   }
 
   getPlaceholderImage(): string {
-    return 'data:image/svg+xml,' + encodeURIComponent(`
-      <svg xmlns="http://www.w3.org/2000/svg" width="500" height="750" viewBox="0 0 500 750">
-        <rect fill="#232323" width="500" height="750"/>
-        <text fill="#666" font-family="Inter, sans-serif" font-size="24" text-anchor="middle" x="250" y="375">No Image</text>
-      </svg>
-    `);
+    // Return a random picsum image when no specific image is provided
+    return 'https://picsum.photos/300/450?grayscale';
   }
 
   getBackdropPlaceholder(): string {
