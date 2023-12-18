@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Movie, TmdbService } from '../../services/tmdb.service';
 
@@ -7,7 +7,7 @@ import { Movie, TmdbService } from '../../services/tmdb.service';
   standalone: true,
   imports: [CommonModule],
   template: `
-    <div class="movie-card" (mouseenter)="isHovered = true" (mouseleave)="isHovered = false">
+    <div class="movie-card" (mouseenter)="isHovered = true" (mouseleave)="isHovered = false" (click)="selectMovie.emit(movie)">
       <div class="card-poster">
         <img [src]="getPosterUrl()" [alt]="movie.title || movie.name" loading="lazy">
         <div class="card-overlay" [class.visible]="isHovered">
@@ -168,6 +168,7 @@ import { Movie, TmdbService } from '../../services/tmdb.service';
 })
 export class MovieCardComponent {
   @Input() movie!: Movie;
+  @Output() selectMovie = new EventEmitter<Movie>();
   isHovered = false;
 
   constructor(private tmdbService: TmdbService) {}

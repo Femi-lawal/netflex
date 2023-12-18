@@ -1,4 +1,4 @@
-import { Component, Input, ElementRef, ViewChild } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Movie } from '../../services/tmdb.service';
 import { MovieCardComponent } from '../movie-card/movie-card.component';
@@ -23,7 +23,7 @@ import { MovieCardComponent } from '../movie-card/movie-card.component';
         
         <div class="row-scroll" #scrollContainer (scroll)="onScroll()">
           @for (movie of movies; track movie.id) {
-            <app-movie-card [movie]="movie"></app-movie-card>
+            <app-movie-card [movie]="movie" (selectMovie)="selectMovie.emit($event)"></app-movie-card>
           }
         </div>
         
@@ -124,6 +124,7 @@ import { MovieCardComponent } from '../movie-card/movie-card.component';
 export class MovieRowComponent {
   @Input() title = '';
   @Input() movies: Movie[] = [];
+  @Output() selectMovie = new EventEmitter<Movie>();
   
   @ViewChild('scrollContainer') scrollContainer!: ElementRef<HTMLDivElement>;
   

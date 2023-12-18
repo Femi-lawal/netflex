@@ -3,12 +3,13 @@ import { CommonModule } from '@angular/common';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HeroBannerComponent } from './components/hero-banner/hero-banner.component';
 import { MovieRowComponent } from './components/movie-row/movie-row.component';
+import { MovieModalComponent } from './components/movie-modal/movie-modal.component';
 import { Movie, TmdbService } from './services/tmdb.service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, NavbarComponent, HeroBannerComponent, MovieRowComponent],
+  imports: [CommonModule, NavbarComponent, HeroBannerComponent, MovieRowComponent, MovieModalComponent],
   template: `
     <app-navbar></app-navbar>
     
@@ -17,27 +18,27 @@ import { Movie, TmdbService } from './services/tmdb.service';
       
       <div class="content-rows">
         @if (trendingMovies.length) {
-          <app-movie-row title="Trending Now" [movies]="trendingMovies"></app-movie-row>
+          <app-movie-row title="Trending Now" [movies]="trendingMovies" (selectMovie)="openModal($event)"></app-movie-row>
         }
         
         @if (topRatedMovies.length) {
-          <app-movie-row title="Top Rated" [movies]="topRatedMovies"></app-movie-row>
+          <app-movie-row title="Top Rated" [movies]="topRatedMovies" (selectMovie)="openModal($event)"></app-movie-row>
         }
         
         @if (actionMovies.length) {
-          <app-movie-row title="Action & Adventure" [movies]="actionMovies"></app-movie-row>
+          <app-movie-row title="Action & Adventure" [movies]="actionMovies" (selectMovie)="openModal($event)"></app-movie-row>
         }
         
         @if (comedyMovies.length) {
-          <app-movie-row title="Comedy" [movies]="comedyMovies"></app-movie-row>
+          <app-movie-row title="Comedy" [movies]="comedyMovies" (selectMovie)="openModal($event)"></app-movie-row>
         }
         
         @if (horrorMovies.length) {
-          <app-movie-row title="Horror" [movies]="horrorMovies"></app-movie-row>
+          <app-movie-row title="Horror" [movies]="horrorMovies" (selectMovie)="openModal($event)"></app-movie-row>
         }
         
         @if (popularTVShows.length) {
-          <app-movie-row title="Popular TV Shows" [movies]="popularTVShows"></app-movie-row>
+          <app-movie-row title="Popular TV Shows" [movies]="popularTVShows" (selectMovie)="openModal($event)"></app-movie-row>
         }
       </div>
     </main>
@@ -48,6 +49,10 @@ import { Movie, TmdbService } from './services/tmdb.service';
         <p class="footer-credit">Built with Angular 17 &amp; TMDB API</p>
       </div>
     </footer>
+    
+    @if (selectedMovie) {
+      <app-movie-modal [movie]="selectedMovie" (close)="closeModal()"></app-movie-modal>
+    }
   `,
   styles: [`
     .main-content {
@@ -87,6 +92,7 @@ import { Movie, TmdbService } from './services/tmdb.service';
 })
 export class AppComponent implements OnInit {
   featuredMovie: Movie | null = null;
+  selectedMovie: Movie | null = null;
   trendingMovies: Movie[] = [];
   topRatedMovies: Movie[] = [];
   actionMovies: Movie[] = [];
@@ -98,6 +104,16 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadMovies();
+  }
+
+  openModal(movie: Movie): void {
+    this.selectedMovie = movie;
+    document.body.style.overflow = 'hidden';
+  }
+
+  closeModal(): void {
+    this.selectedMovie = null;
+    document.body.style.overflow = '';
   }
 
   loadMovies(): void {
